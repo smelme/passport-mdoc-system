@@ -21,10 +21,7 @@ import { generateKeyPair, SignJWT, exportJWK } from 'jose';
 import { PassportDataReader } from './passport-nfc-reader.js';
 import qrcode from 'qrcode-terminal';
 
-// Make crypto globally available for jose library (only if not already set)
-if (typeof global.crypto === 'undefined') {
-    global.crypto = crypto;
-}
+// Node.js 20+ already has global crypto available - no need to set it
 
 const ISSUER_BASE = 'http://localhost:7002';
 const VERIFIER_BASE = 'http://localhost:7003';
