@@ -126,3 +126,4 @@ node setup-mdoc-pki.js
 - `npm run qr-test` - Start QR testing server
 - `npm start` - Start web authentication service
 - `npm test` - Run system tests
+npm run passport-ui
