@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  issuer-api:
+    image: waltid/issuer-api:latest
+    container_name: waltid-issuer
+    ports:
+      - "7002:3000"
+    environment:
+      - ISSUER_API_PORT=7002
+      - SERVICE_HOST=localhost
+    volumes:
+      - ./issuer-config:/waltid-issuer-api/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  verifier-api:
+    image: waltid/verifier-api:latest
+    container_name: waltid-verifier
+    ports:
+      - "7003:3000"
+    environment:
+      - VERIFIER_API_PORT=7003
+      - SERVICE_HOST=localhost
+    volumes:
+      - ./verifier-config:/waltid-verifier-api/config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  # Optional: Add a simple reverse proxy for easier access
+  caddy:
+    image: caddy:2
+    container_name: waltid-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    restart: unless-stopped

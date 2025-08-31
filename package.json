@@ -1,0 +1,47 @@
+{
+  "name": "waltid-passport-mdoc",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Passport mDoc issuance and verification using walt.id with NFC integration",
+  "main": "mdoc-issuer.js",
+  "scripts": {
+    "test": "node waltid-test.js",
+    "start": "node web-auth-service.js",
+    "discover": "node discover-apis.js",
+    "complete": "node test-complete-flow.js",
+    "working": "node test-working.js",
+    "e2e": "node end2end-issue-verify.js",
+    "e2e-mobile": "node e2e-mobile-setup.js",
+    "qr-test": "node qr-test-server.js",
+    "nfc-reader": "node passport-nfc-reader.js",
+    "issue-mdoc": "node mdoc-issuer.js",
+    "web-auth": "node web-auth-service.js",
+    "passport-ui": "node passport-reader-server.js",
+    "setup": "./setup-codespaces.sh"
+  },
+  "dependencies": {
+    "axios": "^1.6.0",
+    "cors": "^2.8.5",
+    "express": "^4.21.0",
+    "jose": "^6.1.0",
+    "jsonwebtoken": "^9.0.0",
+    "ngrok": "^4.3.3",
+    "qrcode": "^1.5.4",
+    "qrcode-terminal": "^0.12.0",
+    "uuid": "^9.0.0"
+  },
+  "keywords": [
+    "waltid",
+    "mdoc",
+    "passport",
+    "nfc",
+    "verifiable-credentials",
+    "iso18013-5",
+    "authentication",
+    "openid4vc",
+    "credentials",
+    "ssi"
+  ],
+  "author": "",
+  "license": "MIT"
+}

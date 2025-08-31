@@ -1,0 +1,26 @@
+# Reverse proxy configuration for waltId services
+localhost {
+    # Issuer API
+    handle /issuer/* {
+        uri strip_prefix /issuer
+        reverse_proxy issuer-api:7002
+    }
+
+    # Verifier API
+    handle /verifier/* {
+        uri strip_prefix /verifier
+        reverse_proxy verifier-api:7003
+    }
+
+    # Direct access to APIs
+    handle /openid4vc/* {
+        reverse_proxy issuer-api:7002 verifier-api:7003 {
+            lb_policy first_available
+        }
+    }
+
+    # Health check
+    handle /health {
+        respond "OK" 200
+    }
+}

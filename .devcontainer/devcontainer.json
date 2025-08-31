@@ -1,0 +1,59 @@
+{
+  "name": "Passport mDoc System",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:1-20-bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-vscode.vscode-json",
+        "bradlc.vscode-tailwindcss",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "formulahendry.auto-rename-tag",
+        "christian-kohler.path-intellisense",
+        "ms-vscode.live-server"
+      ],
+      "settings": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.codeActionsOnSave": {
+          "source.fixAll": "explicit"
+        }
+      }
+    }
+  },
+  "forwardPorts": [3001, 7001, 7002, 7003, 8080, 9000],
+  "portsAttributes": {
+    "3001": {
+      "label": "QR Test Server",
+      "onAutoForward": "notify"
+    },
+    "7001": {
+      "label": "walt.id Wallet API",
+      "onAutoForward": "ignore"
+    },
+    "7002": {
+      "label": "walt.id Issuer API",
+      "onAutoForward": "ignore"
+    },
+    "7003": {
+      "label": "walt.id Verifier API",
+      "onAutoForward": "ignore"
+    },
+    "8080": {
+      "label": "Passport Reader UI",
+      "onAutoForward": "openBrowser"
+    },
+    "9000": {
+      "label": "Web Auth Service",
+      "onAutoForward": "notify"
+    }
+  },
+  "postCreateCommand": "npm install",
+  "postStartCommand": "docker-compose up -d && echo '🚀 walt.id services starting... Run: npm run passport-ui'",
+  "remoteUser": "node",
+  "workspaceFolder": "/workspaces/waltid"
+}
